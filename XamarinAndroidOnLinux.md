@@ -47,4 +47,4 @@ Specified Target Framework in project file must be installed with android sdk to
 
 Change directory to where solution is and run:
 
- msbuild /p:TargetFrameworkRootPath="/usr/lib/mono/xbuild-frameworks/" /p:AndroidSdkDirectory="/usr/lib/"
+ msbuild /p:TargetFrameworkRootPath="/usr/lib/mono/xbuild-frameworks/" /p:AndroidSdkDirectory="/usr/lib/android-sdk"
