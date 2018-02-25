@@ -48,3 +48,13 @@ Specified Target Framework in project file must be installed with android sdk to
 Change directory to where solution is and run:
 
  msbuild /p:TargetFrameworkRootPath="/usr/lib/mono/xbuild-frameworks/" /p:AndroidSdkDirectory="/usr/lib/android-sdk"
+
+If that works put properties into /usr/lib/mono/xbuild/Xamarin/Android/Xamarin.Android.Common.targets with:  
+
+`<PropertyGroup>`  
+    `<TargetFrameworkRootPath>/usr/lib/mono/xbuild-frameworks/</TargetFrameworkRootPath>` 
+    `<AndroidSdkDirectory>/usr/lib/android-sdk</AndroidSdkDirectory>`  
+`</PropertyGroup>`
+
+and just call msbuild without parameters
+
