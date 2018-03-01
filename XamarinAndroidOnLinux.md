@@ -15,7 +15,8 @@
    sdkmanager "build-tools;23.0.3" "platforms;android-23" "platform-tools" for Android 6.0
 - verify with sdkmanager --list that packages are installed
 - They are now all under /usr/lib/android-sdk (one directory up from the sdk tools) which is the  android sdk directory
- 
+- For some reason e.g. the aapt tool does not work with "no such file or directory" - Run: apt-get install lib32stdc++6 lib32z1
+
 ## Java 8
 
 (not 100% sure about these steps)
@@ -56,5 +57,5 @@ If that works put properties into /usr/lib/mono/xbuild/Xamarin/Android/Xamarin.A
     `<AndroidSdkDirectory>/usr/lib/android-sdk</AndroidSdkDirectory>`  
 `</PropertyGroup>`
 
-and just call msbuild without parameters
+and just call msbuild without parameters. AndroidSdkDirectory must not contain any placeholder or environment variables. Also ~ for home will not work.
 
