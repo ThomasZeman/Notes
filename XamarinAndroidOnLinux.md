@@ -59,3 +59,12 @@ If that works put properties into /usr/lib/mono/xbuild/Xamarin/Android/Xamarin.A
 
 and just call msbuild without parameters. AndroidSdkDirectory must not contain any placeholder or environment variables. Also ~ for home will not work.
 
+## Build APK
+
+- Xamarin offers /t:SignAndroidPackage which unfortunately needs key store location and passwords as part of the csproj file. Security no-go for me. Better use /t:PackageForAndroid which builds APK only.
+- /t:PackageForAndroid does not run zipalign and signing.
+- Build for Debug and Release and do debug and release signing by yourself.
+
+## Remarks
+
+- With version 8.3.99 /t:SignAndroidPackage creates a debug keystore with a signing key which is no longer accepted as safe enough. [Details here.](https://github.com/xamarin/xamarin-android/issues/1361)
