@@ -41,6 +41,16 @@ sudo ./monogame-sdk.run
 - Add artifacts to build section to save binaries compiled during build
 - Add dependency to test and deploy stages to restore artifacts
 
+## Security
+
+I currently don't see how security for the keystore itself and its passwords is achieved. Options are GitLab security variables, jarsigner with password in a file or env variables. All things I suppose could be easily routed to the gitlab runner output.
+There are already different thoughts about this but it seems there is no final conclusion on what to do. For example:
+- https://gitlab.com/gitlab-org/gitlab-ce/issues/20826
+
+Some thoughts:
+
+Having a separate deployment (master, release) branch with an extra runner and protected variables. Only certain people are allowed to pull on that branch.
+
 ### Deploy to local nuget
 
 Add lines to pack and add nuget to local repository (see "Nuget for every project") like:
