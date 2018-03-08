@@ -66,6 +66,20 @@ and just call msbuild without parameters. AndroidSdkDirectory must not contain a
 - /t:PackageForAndroid does not run zipalign and signing.
 - Build for Debug and Release and do debug and release signing by yourself.
 
+Debug APKs are much bigger under Linux than under Windows because assemblies get embedded. And this is because of:  
+"
+Property reassignment: $(AndroidUseSharedRuntime)="False" (previous value: "true") at /usr/lib/mono/xbuild/Xamarin/Android/Xamarin.Android.Common.targets (188,2)
+Property reassignment: $(EmbedAssembliesIntoApk)="True" (previous value: "false") at /usr/lib/mono/xbuild/Xamarin/Android/Xamarin.Android.Common.targets (196,2)
+"  
+
+which depends on  
+
+ <_XASupportsFastDev Condition=" Exists ('$(MSBuildThisFileDirectory)Xamarin.Android.Common.Debugging.targets') ">True</_XASupportsFastDev>
+
+which evaluates to false because file *Debugging.targets seems not to be part of the linux package. 
+
+- Usage of ProGuard is broken with the current version (8.3.99). Symptoms: App starts but hangs. Reason: https://github.com/xamarin/xamarin-android/issues/1331 > Disabled ProGuard. Difference in size for my current app is ~2kb.
+
 ### Check signature
 
 jarsigner -verify -verbose -certs my_application.apk
