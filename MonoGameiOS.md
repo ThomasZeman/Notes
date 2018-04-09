@@ -1,0 +1,7 @@
+- Install XCode
+- Install Visual Studio Community
+- Install MonoGame for Mac
+- Install Nuget CLI or self update
+- Mount nuget package share because nuget cannot connect to samba share directly (https://superuser.com/questions/336665/how-to-automount-smb-shared-network-drives-in-mac-os-x-lion)
+- Add nuget source(s)
+- Ensure that share is accessible after reboot without any manual interaction. Otherwise I have seen Visual Studio crashing upon opening solution with some error 87.

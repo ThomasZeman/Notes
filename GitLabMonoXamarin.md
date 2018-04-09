@@ -15,6 +15,16 @@ wget http://www.monogame.net/releases/v3.6/monogame-sdk.run
 chmod +x monogame-sdk.run  
 sudo ./monogame-sdk.run
 
+### Build Dependencies for Xamarin Android in conjunction with Nuget
+
+When getting monogame pipeline importers via nuget the following build target order is critical:
+
+1. Get Nuget package with pipeline importers (otherwise pipeline tool will not find the importers)
+2. Run MonoGame Pipeline tool (which actually creates files with build type "AndroidAsset" - see MonoGame.Content.Builder.targets Target BuildContent)
+3. Run compile (which requires the files with build type "AndroidAsset" otherwise compile succeeds but APK does not contain any assets)
+
+
+
 ## Nuget for every project
 
 - apt-get install nuget
