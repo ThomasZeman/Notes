@@ -36,6 +36,8 @@
 - Copy MonoAndroid subdirectory recursively from:  
     /tmp/xamarin.android-oss_vx.x.xx.x_Linux-x86_64_HEAD_xxxxxxxx/bin/Release/lib/xamarin.android/xbuild-frameworks to /usr/lib/mono/xbuilds-frameworks
 
+(Warning: the target directories contain mono itself. So do only copy/merge the xamarin.android files)
+
 ## Build
 
 After a lot of reading through /usr/lib/mono/xbuild/Xamarin/Android/Xamarin.Android.Common.targets two important parameters turn 
@@ -62,7 +64,7 @@ and just call msbuild without parameters. AndroidSdkDirectory must not contain a
 ## Build APK
 
 - Seems like when building for all ABIs (armv7,v8,intel and so on) Xamarin on Windows just empties the corresponding XML element which seems to be interpreted as default armv7 only on linux. Need to explicitly specify all wanted ABIs in csproj for all build types (`<AndroidSupportedAbis`>armeabi;armeabi-v7a;x86;arm64-v8a`</AndroidSupportedAbis`> Leaving x64 out in this example). Otherwise app cannot be installed on devices with some "corrupted" error message. 
-- Xamarin offers /t:SignAndroidPackage which unfortunately needs key store location and passwords as part of the csproj file. Security no-go for me. Better use /t:PackageForAndroid which builds APK only.
+- Xamarin offers /t:SignAndroidPackage which needs key store location and passwords as part of the csproj file. Security no-go for me. Better use /t:PackageForAndroid which builds APK only.
 - /t:PackageForAndroid does not run zipalign and signing.
 - Build for Debug and Release and do debug and release signing by yourself.
 
